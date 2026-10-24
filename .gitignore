@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+coverage/
+
+# Environment files (keep .env.example committed)
+.env
+.env.*
+!.env.example
+credentials.json
+*.pem
+*.p12
+*.key
+
+# Temporary cloned repositories
+.tmp/
+tmp/
+repos/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/

@@ -1,0 +1,23 @@
+---
+description: Core RepoPilot coding conventions for all TypeScript code
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# RepoPilot conventions
+
+- TypeScript strict; no `any` — use `unknown` and narrow.
+- Use `import type` for type-only imports.
+- In `apps/api` and `packages/mcp-server`, relative imports end with `.js`:
+
+```ts
+// ✅
+import { healthRouter } from "./routes/health.js";
+// ❌
+import { healthRouter } from "./routes/health";
+```
+
+- Express: thin route handlers in `src/routes`, logic in `src/services`, shared helpers in `src/utils`.
+- MCP server: one tool per file in `src/tools`, input validated with `zod`, never write to stdout.
+- Treat cloned repositories as untrusted: read-only access, no code execution, block path traversal.
+- Run `npm run check` before finishing a task.
