@@ -9,9 +9,16 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .page {
@@ -23,6 +30,7 @@ body {
 .page h1 {
   margin: 0 0 0.5rem;
   font-size: 2.5rem;
+  overflow-wrap: break-word;
 }
 
 .page p {
@@ -125,13 +133,6 @@ body {
   color: #e0f2fe;
 }
 
-@media (max-width: 680px) {
-  .connect-form__notice {
-    padding: 0.75rem 0.85rem;
-    font-size: 0.82rem;
-  }
-}
-
 .connect-form__input {
   flex: 1 1 260px;
   padding: 0.65rem 0.9rem;
@@ -186,12 +187,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .repo-card__name {
   margin: 0;
   font-size: 1.4rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .repo-card__disconnect {
@@ -245,12 +249,6 @@ body {
   min-height: 420px;
 }
 
-@media (max-width: 680px) {
-  .explorer {
-    grid-template-columns: 1fr;
-  }
-}
-
 .explorer__sidebar {
   display: flex;
   flex-direction: column;
@@ -292,6 +290,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
@@ -318,6 +318,7 @@ body {
   cursor: pointer;
   font-size: 0.85rem;
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  overflow-wrap: anywhere;
 }
 
 .explorer__list button:hover {
@@ -474,6 +475,7 @@ body {
   color: #e2e8f0;
   line-height: 1.55;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .ask__sources {
@@ -540,6 +542,7 @@ body {
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   font-size: 0.8rem;
   color: #e2e8f0;
+  overflow-wrap: anywhere;
 }
 
 .viewer__code {
@@ -566,4 +569,142 @@ body {
 .viewer__lc {
   white-space: pre;
   padding-right: 1rem;
+}
+
+@media (max-width: 680px) {
+  .page {
+    padding: 1.25rem 1rem 2rem;
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  .page h1 {
+    font-size: 1.55rem;
+    line-height: 1.2;
+  }
+
+  .page__header {
+    align-items: flex-start;
+  }
+
+  .connect-form {
+    flex-direction: column;
+    margin-top: 1.25rem;
+  }
+
+  .connect-form__input,
+  .connect-form__button {
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 2.75rem;
+  }
+
+  .connect-form__notice {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .repo-card {
+    margin-top: 1.25rem;
+    padding: 1rem;
+  }
+
+  .repo-card__header {
+    align-items: flex-start;
+  }
+
+  .repo-card__name {
+    font-size: 1.15rem;
+  }
+
+  .repo-card__disconnect {
+    min-height: 2.5rem;
+  }
+
+  .repo-card__meta {
+    gap: 0.85rem 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .explorer {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    margin-top: 1rem;
+  }
+
+  .explorer__sidebar {
+    max-height: 16rem;
+  }
+
+  .explorer__search {
+    flex-wrap: wrap;
+  }
+
+  .explorer__search input,
+  .explorer__search button {
+    min-height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .explorer__search button {
+    flex: 0 0 auto;
+  }
+
+  .explorer__list button {
+    padding: 0.55rem 0.5rem;
+  }
+
+  .ask {
+    padding: 12px;
+  }
+
+  .ask__form {
+    flex-direction: column;
+  }
+
+  .ask__input,
+  .ask__button {
+    width: 100%;
+    min-height: 2.75rem;
+    font-size: 1rem;
+  }
+
+  .ask__sources button {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-align: left;
+  }
+
+  .viewer {
+    min-height: 12rem;
+    max-height: 22rem;
+  }
+
+  .viewer__ln {
+    flex-basis: 2.25rem;
+    padding-right: 0.5rem;
+  }
+
+  .viewer__code {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .page h1 {
+    font-size: 1.35rem;
+  }
+
+  .explorer__search {
+    flex-direction: column;
+  }
+
+  .explorer__search button {
+    width: 100%;
+  }
+
+  .repo-card__disconnect {
+    width: 100%;
+  }
 }
