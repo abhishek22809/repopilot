@@ -1,8 +1,18 @@
-# First-time deployment (local preparation only)
+# Deployment checklist
 
-This file is a checklist. **Nothing here has been deployed.** Do not reuse or
-modify an existing Vercel or Render project. Create **new** GitHub, Render, and
-Vercel resources when you are ready.
+Published origins (do not reuse a different Vercel or Render project unless you
+intend to replace these):
+
+| Piece | URL |
+| ----- | --- |
+| Frontend (Vercel) | https://repopilot-swart.vercel.app |
+| API (Render) | https://repopilot-sjux.onrender.com |
+| GitHub | https://github.com/abhishek22809/repopilot |
+
+Health (`/health`, `/api/health`) and CORS for the Vercel origin were checked.
+Live Gemini Ask on production is **NOT VERIFIED** until you exercise it.
+
+The tables below are the settings used to create those services.
 
 Verified from this repository:
 
@@ -157,4 +167,4 @@ This does **not** prove Render or Vercel work.
   policy decision, not something RepoPilot can enforce.
 - Private-repo support is documented as MVP and has not had a dedicated production
   security review.
-- Live Gemini and any cloud deploy remain **NOT VERIFIED** until you actually exercise them.
+- Live Gemini Ask on production remains **NOT VERIFIED** until you actually exercise it.

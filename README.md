@@ -2,7 +2,11 @@
 
 Paste a GitHub repository URL and let RepoPilot help you explore and understand it.
 
-> Status: Optional per-request GitHub token for **authorized private repositories**, plus the existing public-repo, MCP, and Ask flows. **Private-repo support is an MVP — not production-ready without a security review.** Live Gemini and production deployment remain **NOT VERIFIED** unless you have exercised them yourself.
+For a professional project write-up (frontend/backend stack, MCP, Cursor hooks and skills, CI, and intended deployment), see **[docs/PROJECT_DESCRIPTION.md](docs/PROJECT_DESCRIPTION.md)**.
+
+> Status: Optional per-request GitHub token for **authorized private repositories**, plus the existing public-repo, MCP, and Ask flows. **Private-repo support is an MVP — not production-ready without a security review.** Live Gemini answering remains **NOT VERIFIED** unless you have exercised it yourself.
+
+**Live app:** [frontend (Vercel)](https://repopilot-swart.vercel.app) · [API (Render)](https://repopilot-sjux.onrender.com/health)
 
 ## Tech stack
 
@@ -220,16 +224,19 @@ optionally override `GEMINI_MODEL`, and restart the API. Live Gemini answering i
 - Exceeding a limit returns HTTP `429` with `{ "error": "Too many requests. …" }` and a
   `Retry-After` header. No filesystem paths or tokens are included.
 
-## Intended deployment (NOT VERIFIED)
+## Deployment
 
-Nothing in this repo has been deployed. Do not modify an existing Vercel or Render project
-unless you explicitly ask. First-time steps (new GitHub repo, new Render API, new Vercel
-frontend) are in **[DEPLOY.md](DEPLOY.md)**.
+| Piece | Host | URL |
+| ----- | ---- | --- |
+| Frontend | Vercel | https://repopilot-swart.vercel.app |
+| API + MCP | Render | https://repopilot-sjux.onrender.com |
 
-| Piece | Host | Verified command |
-| ----- | ---- | ---------------- |
-| `apps/web` | Vercel (static Vite build) | Build `npm run build:web` → `apps/web/dist`. Set `VITE_API_BASE_URL` at **build** time |
-| `apps/api` + `packages/mcp-server` | Render (Node 22 web service) | Build `npm run build:backend`, start `npm start`. Set `WEB_ORIGIN`, `TRUST_PROXY=1` |
+Checked: frontend HTTP 200; `GET /health` and `GET /api/health` return ok; CORS allows the Vercel origin; the frontend build includes the Render API base. A full production Ask (live Gemini) pass is **NOT VERIFIED** here. Setup details stay in **[DEPLOY.md](DEPLOY.md)**.
+
+| Piece | Host | Command / env |
+| ----- | ---- | ------------- |
+| `apps/web` | Vercel (static Vite build) | `npm run build:web` → `apps/web/dist`. `VITE_API_BASE_URL=https://repopilot-sjux.onrender.com` at **build** time |
+| `apps/api` + `packages/mcp-server` | Render (Node 22 web service) | `npm run build:backend`, start `npm start`. `WEB_ORIGIN=https://repopilot-swart.vercel.app`, `TRUST_PROXY=1` |
 
 The frontend never holds the Gemini key. CORS is an allow-list of `WEB_ORIGIN` only.
 

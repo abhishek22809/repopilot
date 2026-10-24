@@ -4,8 +4,8 @@ Status: **Phase 7 — documentation, engineering automation, and pre-deployment 
 Health checks, connecting a public GitHub repository (download + safe extraction),
 exploring it (list/search/read via a real MCP server), asking natural-language questions
 answered from MCP-retrieved context (Google Gemini, optional key), and per-IP rate limits
-on connect/browse all exist. **Live Gemini is NOT VERIFIED. Production deployment is NOT
-VERIFIED.**
+on connect/browse all exist. **Live Gemini is NOT VERIFIED.** Production hosts are
+Vercel (frontend) and Render (API); health/CORS were checked, a full Ask pass was not.
 
 ## 1. Goal
 
@@ -34,7 +34,7 @@ flowchart LR
 | `packages/mcp-server` | MCP server: `list_project_files`, `search_project_code`, `read_project_file` | done |
 | Temp repo store       | Per-session extracted files on local disk, deleted after a 30 min TTL   | done     |
 | AI provider (Gemini)  | Answers questions using MCP-retrieved repository context (optional key) | done (live call NOT VERIFIED) |
-| Hosting               | Vercel frontend + Render backend                                       | documented, not deployed |
+| Hosting               | Vercel frontend + Render backend                                       | live URLs in `docs/PROJECT_DESCRIPTION.md` |
 
 ## 3. Current API surface
 
@@ -258,11 +258,16 @@ multi-turn conversation persistence.
 - Cursor project hooks (schema v1): deploy/push confirmation and `.env` write confirmation.
   Verify with `npm run verify:hooks`. CI: `.github/workflows/check.yml`.
 
-## 7. Intended deployment (NOT VERIFIED — not deployed)
+## 7. Deployment
 
 Split hosting, because the API needs a long-lived Node process, a writable disk for
 temporary clones, and a child MCP process — none of which fit a static Vercel function
 well.
+
+| Piece | URL |
+| ----- | --- |
+| Frontend (Vercel) | https://repopilot-swart.vercel.app |
+| API (Render) | https://repopilot-sjux.onrender.com |
 
 ```mermaid
 flowchart LR
@@ -287,8 +292,9 @@ must keep the process alive (not a serverless function) so the MCP child and in-
 sessions survive across requests. Disk is ephemeral unless a persistent disk is attached —
 sessions are already short-TTL, so ephemeral disk is acceptable.
 
-This architecture is **documented only**. No Vercel or Render project has been created or
-modified from this repository.
+Live origins: frontend `https://repopilot-swart.vercel.app`, API
+`https://repopilot-sjux.onrender.com`. Health and CORS were checked; live Gemini Ask is
+**NOT VERIFIED** until exercised.
 
 ## 8. Known limitations
 
