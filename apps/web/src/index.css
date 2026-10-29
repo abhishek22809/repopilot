@@ -371,10 +371,12 @@ body {
 }
 
 .ask {
+  min-width: 0;
   background: #0b1220;
   border: 1px solid #334155;
   border-radius: 10px;
   padding: 16px;
+  overflow-wrap: break-word;
 }
 
 .ask__header {
@@ -480,6 +482,7 @@ body {
 
 .ask__sources {
   margin-top: 12px;
+  min-width: 0;
 }
 
 .ask__sources-label {
@@ -496,9 +499,17 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  max-width: 100%;
+}
+
+.ask__sources li {
+  max-width: 100%;
+  min-width: 0;
 }
 
 .ask__sources button {
+  display: inline-block;
+  max-width: 100%;
   background: #1e293b;
   border: 1px solid #334155;
   border-radius: 6px;
@@ -507,6 +518,8 @@ body {
   font-size: 0.8rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   cursor: pointer;
+  text-align: left;
+  overflow-wrap: break-word;
 }
 
 .ask__sources button:hover {
@@ -514,7 +527,9 @@ body {
 }
 
 .viewer {
-  height: 100%;
+  min-width: 0;
+  min-height: 16rem;
+  max-height: min(36rem, 70vh);
   background: #0b1220;
   border: 1px solid #334155;
   border-radius: 10px;
@@ -537,6 +552,7 @@ body {
 }
 
 .viewer__path {
+  flex: 0 0 auto;
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid #334155;
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
@@ -546,16 +562,43 @@ body {
 }
 
 .viewer__code {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 0.75rem;
   overflow: auto;
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   font-size: 0.82rem;
   line-height: 1.5;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #64748b #0b1220;
+}
+
+.viewer__code::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.viewer__code::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 8px;
+}
+
+.viewer__code::-webkit-scrollbar-track {
+  background: #0b1220;
+}
+
+.viewer__code > code {
+  display: block;
+  min-width: 100%;
+  width: max-content;
 }
 
 .viewer__line {
   display: flex;
+  width: 100%;
 }
 
 .viewer__ln {
@@ -569,6 +612,7 @@ body {
 .viewer__lc {
   white-space: pre;
   padding-right: 1rem;
+  flex: 1 0 auto;
 }
 
 @media (max-width: 680px) {
@@ -670,15 +714,9 @@ body {
     font-size: 1rem;
   }
 
-  .ask__sources button {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    text-align: left;
-  }
-
   .viewer {
     min-height: 12rem;
-    max-height: 22rem;
+    max-height: min(22rem, 60vh);
   }
 
   .viewer__ln {

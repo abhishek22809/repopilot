@@ -15,7 +15,9 @@ export default function FileViewer({ file, loading, error }: FileViewerProps) {
 
   return (
     <div className="viewer">
-      <div className="viewer__path">{file.path}</div>
+      <div className="viewer__path" title={file.path}>
+        {file.path}
+      </div>
       <pre className="viewer__code">
         <code>
           {lines.map((line, index) => (
